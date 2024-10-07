@@ -37,6 +37,8 @@ contract TadleFactory is Context, ITadleFactory {
         _;
     }
 
+    // e set the guardian(owner) address in the constructor
+    // @audit-previous - no zero address check for guardian
     constructor(address _guardian) {
         guardian = _guardian;
     }
@@ -48,23 +50,24 @@ contract TadleFactory is Context, ITadleFactory {
      * @param _logic address of logic contract
      * @param _data call data for logic
      */
-    function deployUpgradeableProxy(
-        uint8 _relatedContractIndex,
-        address _logic,
-        bytes memory _data
-    ) external onlyGuardian returns (address) {
+
+    // e tadle factory is responsible for deploying the proxy of the related contracts
+    // e the deploy function is callable only by the guardian(the admin)
+
+    function deployUpgradeableProxy(uint8 _relatedContractIndex, address _logic, bytes memory _data)
+        external
+        onlyGuardian
+        returns (address)
+    {
         /// @dev the logic address must be a contract
+        // @audit-previous - not a proper way to check if address is contract or EOA
         if (!_logic.isContract()) {
             revert LogicAddrIsNotContract(_logic);
         }
 
         /// @dev deploy proxy
-        UpgradeableProxy _proxy = new UpgradeableProxy(
-            _logic,
-            guardian,
-            address(this),
-            _data
-        );
+        UpgradeableProxy _proxy = new UpgradeableProxy(_logic, guardian, address(this), _data);
+        // e deploy new related contract and store it in relatedContracts
         relatedContracts[_relatedContractIndex] = address(_proxy);
         emit RelatedContractDeployed(_relatedContractIndex, address(_proxy));
         return address(_proxy);

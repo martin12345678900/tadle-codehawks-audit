@@ -17,10 +17,11 @@ library MarketPlaceLibraries {
      * @dev block timestamp is larger than tge + settlementPeriod, return BidSettling
      * @dev block timestamp is larger than tge, return AskSettling
      */
-    function getMarketPlaceStatus(
-        uint256 _blockTimestamp,
-        MarketPlaceInfo memory _marketPlaceInfo
-    ) internal pure returns (MarketPlaceStatus _status) {
+    function getMarketPlaceStatus(uint256 _blockTimestamp, MarketPlaceInfo memory _marketPlaceInfo)
+        internal
+        pure
+        returns (MarketPlaceStatus _status)
+    {
         if (_marketPlaceInfo.status == MarketPlaceStatus.Offline) {
             return MarketPlaceStatus.Offline;
         }
@@ -30,10 +31,7 @@ library MarketPlaceLibraries {
             return _marketPlaceInfo.status;
         }
 
-        if (
-            _blockTimestamp >
-            _marketPlaceInfo.tge + _marketPlaceInfo.settlementPeriod
-        ) {
+        if (_blockTimestamp > _marketPlaceInfo.tge + _marketPlaceInfo.settlementPeriod) {
             return MarketPlaceStatus.BidSettling;
         }
 
@@ -56,10 +54,7 @@ library MarketPlaceLibraries {
         uint256 _blockTimestamp,
         MarketPlaceStatus _status
     ) internal pure {
-        MarketPlaceStatus status = getMarketPlaceStatus(
-            _blockTimestamp,
-            _marketPlaceInfo
-        );
+        MarketPlaceStatus status = getMarketPlaceStatus(_blockTimestamp, _marketPlaceInfo);
 
         if (status != _status) {
             revert("Mismatched Marketplace status");

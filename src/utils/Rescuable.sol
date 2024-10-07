@@ -10,10 +10,8 @@ import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
  * @dev An abstract contract that can be rescued.
  */
 contract Rescuable is Ownable, Pausable {
-    bytes4 private constant TRANSFER_SELECTOR =
-        bytes4(keccak256(bytes("transfer(address,uint256)")));
-    bytes4 private constant TRANSFER_FROM_SELECTOR =
-        bytes4(keccak256(bytes("transferFrom(address,address,uint256)")));
+    bytes4 private constant TRANSFER_SELECTOR = bytes4(keccak256(bytes("transfer(address,uint256)")));
+    bytes4 private constant TRANSFER_FROM_SELECTOR = bytes4(keccak256(bytes("transferFrom(address,address,uint256)")));
 
     /// @dev Event emitted when the pause status is set
     event SetPauseStatus(bool status);
@@ -61,11 +59,7 @@ contract Rescuable is Ownable, Pausable {
      * @param amount The amount to rescue.
      * @notice The caller must be the owner.
      */
-    function rescue(
-        address to,
-        address token,
-        uint256 amount
-    ) external onlyOwner {
+    function rescue(address to, address token, uint256 amount) external onlyOwner {
         if (token == address(0x0)) {
             payable(to).transfer(amount);
         } else {
@@ -81,14 +75,8 @@ contract Rescuable is Ownable, Pausable {
      * @param to The address of the account to transfer to.
      * @param amount The amount to transfer.
      */
-    function _safe_transfer(
-        address token,
-        address to,
-        uint256 amount
-    ) internal {
-        (bool success, ) = token.call(
-            abi.encodeWithSelector(TRANSFER_SELECTOR, to, amount)
-        );
+    function _safe_transfer(address token, address to, uint256 amount) internal {
+        (bool success,) = token.call(abi.encodeWithSelector(TRANSFER_SELECTOR, to, amount));
 
         if (!success) {
             revert TransferFailed();
@@ -101,15 +89,8 @@ contract Rescuable is Ownable, Pausable {
      * @param to The address of the account to transfer to.
      * @param amount The amount to transfer.
      */
-    function _safe_transfer_from(
-        address token,
-        address from,
-        address to,
-        uint256 amount
-    ) internal {
-        (bool success, ) = token.call(
-            abi.encodeWithSelector(TRANSFER_FROM_SELECTOR, from, to, amount)
-        );
+    function _safe_transfer_from(address token, address from, address to, uint256 amount) internal {
+        (bool success,) = token.call(abi.encodeWithSelector(TRANSFER_FROM_SELECTOR, from, to, amount));
 
         if (!success) {
             revert TransferFailed();

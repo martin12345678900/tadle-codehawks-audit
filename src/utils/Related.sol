@@ -17,17 +17,10 @@ contract Related {
     error CallerIsNotDeliveryPlace();
 
     /// @dev check caller is related contracts
-    modifier onlyRelatedContracts(
-        ITadleFactory _tadleFactory,
-        address _msgSender
-    ) {
+    modifier onlyRelatedContracts(ITadleFactory _tadleFactory, address _msgSender) {
         /// @dev check caller is pre markets or delivery place
-        address preMarketsAddr = _tadleFactory.relatedContracts(
-            RelatedContractLibraries.PRE_MARKETS
-        );
-        address deliveryPlaceAddr = _tadleFactory.relatedContracts(
-            RelatedContractLibraries.DELIVERY_PLACE
-        );
+        address preMarketsAddr = _tadleFactory.relatedContracts(RelatedContractLibraries.PRE_MARKETS);
+        address deliveryPlaceAddr = _tadleFactory.relatedContracts(RelatedContractLibraries.DELIVERY_PLACE);
 
         if (_msgSender != preMarketsAddr && _msgSender != deliveryPlaceAddr) {
             revert CallerIsNotRelatedContracts(_msgSender);
@@ -36,13 +29,8 @@ contract Related {
         _;
     }
 
-    modifier onlyDeliveryPlace(
-        ITadleFactory _tadleFactory,
-        address _msgSender
-    ) {
-        address deliveryPlaceAddr = _tadleFactory.relatedContracts(
-            RelatedContractLibraries.DELIVERY_PLACE
-        );
+    modifier onlyDeliveryPlace(ITadleFactory _tadleFactory, address _msgSender) {
+        address deliveryPlaceAddr = _tadleFactory.relatedContracts(RelatedContractLibraries.DELIVERY_PLACE);
 
         if (_msgSender != deliveryPlaceAddr) {
             revert CallerIsNotDeliveryPlace();

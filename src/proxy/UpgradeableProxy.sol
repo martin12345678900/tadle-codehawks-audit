@@ -25,12 +25,9 @@ contract UpgradeableProxy is TransparentUpgradeableProxy {
      * @param _admin address of admin
      * @param _data call data for logic
      */
-    constructor(
-        address _logic,
-        address _admin,
-        address _tadleFactory,
-        bytes memory _data
-    ) TransparentUpgradeableProxy(_logic, _admin, _data) {
+    constructor(address _logic, address _admin, address _tadleFactory, bytes memory _data)
+        TransparentUpgradeableProxy(_logic, _admin, _data)
+    {
         tadleFactory = ITadleFactory(_tadleFactory);
     }
 

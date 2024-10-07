@@ -21,39 +21,28 @@ library RelatedContractLibraries {
     uint8 internal constant CAPITAL_POOL = 4;
     uint8 internal constant TOKEN_MANAGER = 5;
 
-    
     /// @dev Get interface of system config
-    function getSystemConfig(
-        ITadleFactory _tadleFactory
-    ) internal view returns (ISystemConfig) {
+    function getSystemConfig(ITadleFactory _tadleFactory) internal view returns (ISystemConfig) {
         return ISystemConfig(_tadleFactory.relatedContracts(SYSTEM_CONFIG));
     }
 
     /// @dev Get interface of per markets
-    function getPerMarkets(
-        ITadleFactory _tadleFactory
-    ) internal view returns (IPerMarkets) {
+    function getPerMarkets(ITadleFactory _tadleFactory) internal view returns (IPerMarkets) {
         return IPerMarkets(_tadleFactory.relatedContracts(PRE_MARKETS));
     }
 
     /// @dev Get interface of delivery place
-    function getDeliveryPlace(
-        ITadleFactory _tadleFactory
-    ) internal view returns (IDeliveryPlace) {
+    function getDeliveryPlace(ITadleFactory _tadleFactory) internal view returns (IDeliveryPlace) {
         return IDeliveryPlace(_tadleFactory.relatedContracts(DELIVERY_PLACE));
     }
 
     /// @dev Get interface of capital pool
-    function getCapitalPool(
-        ITadleFactory _tadleFactory
-    ) internal view returns (ICapitalPool) {
+    function getCapitalPool(ITadleFactory _tadleFactory) internal view returns (ICapitalPool) {
         return ICapitalPool(_tadleFactory.relatedContracts(CAPITAL_POOL));
     }
 
     /// @dev Get interface of token manager
-    function getTokenManager(
-        ITadleFactory _tadleFactory
-    ) internal view returns (ITokenManager) {
+    function getTokenManager(ITadleFactory _tadleFactory) internal view returns (ITokenManager) {
         return ITokenManager(_tadleFactory.relatedContracts(TOKEN_MANAGER));
     }
 }

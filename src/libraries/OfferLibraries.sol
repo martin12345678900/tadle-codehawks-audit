@@ -32,22 +32,19 @@ library OfferLibraries {
         Math.Rounding _rounding
     ) internal pure returns (uint256) {
         /// @dev bid offer
+        // e return the exact ammount
         if (_offerType == OfferType.Bid && _isMaker) {
             return _amount;
         }
 
         /// @dev ask order
+        // e return the exact ammount
         if (_offerType == OfferType.Ask && !_isMaker) {
             return _amount;
         }
 
-        return
-            Math.mulDiv(
-                _amount,
-                _collateralRate,
-                Constants.COLLATERAL_RATE_DECIMAL_SCALER,
-                _rounding
-            );
+        // e otherwise return the (amount * collateral rate) / COLLATERAL_RATE_DECIMAL_SCALER with the specified rounding
+        return Math.mulDiv(_amount, _collateralRate, Constants.COLLATERAL_RATE_DECIMAL_SCALER, _rounding);
     }
 
     /**
@@ -67,23 +64,16 @@ library OfferLibraries {
         uint256 _usedPoints,
         uint256 _collateralRate
     ) internal pure returns (uint256) {
-        uint256 usedAmount = Math.mulDiv(
-            _amount,
-            _usedPoints,
-            _points,
-            Math.Rounding.Ceil
-        );
+        // amount * usedPoints / points
+        uint256 usedAmount = Math.mulDiv(_amount, _usedPoints, _points, Math.Rounding.Ceil);
 
         if (_offerType == OfferType.Bid) {
             return _amount - usedAmount;
         }
 
-        return
-            Math.mulDiv(
-                _amount - usedAmount,
-                _collateralRate,
-                Constants.COLLATERAL_RATE_DECIMAL_SCALER,
-                Math.Rounding.Floor
-            );
+        // (amount - usedAmount) * collateralRate / COLLATERAL_RATE_DECIMAL_SCALER
+        return Math.mulDiv(
+            _amount - usedAmount, _collateralRate, Constants.COLLATERAL_RATE_DECIMAL_SCALER, Math.Rounding.Floor
+        );
     }
 }

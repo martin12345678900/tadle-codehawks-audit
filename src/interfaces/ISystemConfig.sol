@@ -17,14 +17,10 @@ interface ISystemConfig {
     function getPlatformFeeRate(address _user) external view returns (uint256);
 
     /// @dev Get referral info by referrer
-    function getReferralInfo(
-        address _referrer
-    ) external view returns (ReferralInfo calldata);
+    function getReferralInfo(address _referrer) external view returns (ReferralInfo calldata);
 
     /// @dev Get marketPlace info by marketPlace
-    function getMarketPlaceInfo(
-        address _marketPlace
-    ) external view returns (MarketPlaceInfo calldata);
+    function getMarketPlaceInfo(address _marketPlace) external view returns (MarketPlaceInfo calldata);
 
     /// @dev Emit events when base platform fee rate is updated
     event UpdateBasePlatformFeeRate(uint256 basePlatformFeeRate);
@@ -33,28 +29,17 @@ interface ISystemConfig {
     event UpdateBaseReferralRate(uint256 baseReferralRate);
 
     /// @dev Emit events when user platform fee rate is updated
-    event UpdateUserPlatformFeeRate(
-        address indexed userAddress,
-        uint256 userPlatformFeeRate
-    );
+    event UpdateUserPlatformFeeRate(address indexed userAddress, uint256 userPlatformFeeRate);
 
     /// @dev Emit events when user referral extra rate is updated
-    event UpdateReferralExtraRate(
-        address indexed referrerAddress,
-        uint256 referrerRate
-    );
+    event UpdateReferralExtraRate(address indexed referrerAddress, uint256 referrerRate);
 
     /// @dev Emit events when user referral extra rate is updated
-    event UpdateReferrerExtraRate(
-        address indexed authorityAddress,
-        uint256 authorityRate
-    );
+    event UpdateReferrerExtraRate(address indexed authorityAddress, uint256 authorityRate);
 
     /// @dev Emit events when create marketPlace info
     event CreateMarketPlaceInfo(
-        string indexed marketPlaceName,
-        address indexed marketPlaceAddress,
-        bool indexed fixedratio
+        string indexed marketPlaceName, address indexed marketPlaceAddress, bool indexed fixedratio
     );
 
     /// @dev Emit events when update marketPlace info
@@ -69,27 +54,17 @@ interface ISystemConfig {
 
     /// @dev Emit events when update referrer info
     event UpdateReferrerInfo(
-        address indexed authorityAddress,
-        address indexed referrerAddress,
-        uint256 referrerRate,
-        uint256 authorityRate
+        address indexed authorityAddress, address indexed referrerAddress, uint256 referrerRate, uint256 authorityRate
     );
 
     /// @dev Emit events when update referrer extra rate
-    event UpdateReferralExtraRateMap(
-        address indexed referrerAddress,
-        uint256 referrerRate
-    );
+    event UpdateReferralExtraRateMap(address indexed referrerAddress, uint256 referrerRate);
 
     /// Error when the referrer and the referee cannot be the same person
     error InvalidReferrer(address referrer);
 
     /// Error when invalid referrer rate or authority rate
-    error InvalidRate(
-        uint256 referrerRate,
-        uint256 authorityRate,
-        uint256 totalRate
-    );
+    error InvalidRate(uint256 referrerRate, uint256 authorityRate, uint256 totalRate);
 
     /// Error when referrer rate must be greater than the base number
     error InvalidReferrerRate(uint256 referrerRate);

@@ -16,10 +16,7 @@ interface IDeliveryPlace {
      * @param _authority authority address
      */
     event CloseBidOffer(
-        address indexed _marketPlace,
-        address indexed _maker,
-        address indexed _offer,
-        address _authority
+        address indexed _marketPlace, address indexed _maker, address indexed _offer, address _authority
     );
 
     /**

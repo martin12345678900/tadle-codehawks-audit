@@ -11,7 +11,6 @@ import {ReferralInfo, MarketPlaceInfo} from "../interfaces/ISystemConfig.sol";
  * @notice The 50th to 150th storage slots are used for SystemConfig.
  * @notice Total Storage Gaps: 100, UnUsed Storage Slots: 94.
  */
-
 contract SystemConfigStorage is UpgradeableStorage {
     /// @dev base platform fee rate, default 0.05%
     uint256 public basePlatformFeeRate;

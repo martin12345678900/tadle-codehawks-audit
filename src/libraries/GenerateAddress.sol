@@ -23,10 +23,7 @@ library GenerateAddress {
     }
 
     /// @dev Generate address for market place address with name
-    function generateMarketPlaceAddress(
-        string memory _marketPlaceName
-    ) internal pure returns (address) {
-        return
-            address(uint160(uint256(keccak256(abi.encode(_marketPlaceName)))));
+    function generateMarketPlaceAddress(string memory _marketPlaceName) internal pure returns (address) {
+        return address(uint160(uint256(keccak256(abi.encode(_marketPlaceName)))));
     }
 }

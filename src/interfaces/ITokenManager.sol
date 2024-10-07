@@ -13,12 +13,7 @@ interface ITokenManager {
      * @param amount amount of token
      * @param isPointToken is point token
      */
-    function tillIn(
-        address accountAddress,
-        address tokenAddress,
-        uint256 amount,
-        bool isPointToken
-    ) external payable;
+    function tillIn(address accountAddress, address tokenAddress, uint256 amount, bool isPointToken) external payable;
 
     /**
      * @dev Add token balance
@@ -35,12 +30,7 @@ interface ITokenManager {
     ) external;
 
     /// @dev Emit events when till in
-    event TillIn(
-        address indexed accountAddress,
-        address indexed tokenAddress,
-        uint256 amount,
-        bool isPointToken
-    );
+    event TillIn(address indexed accountAddress, address indexed tokenAddress, uint256 amount, bool isPointToken);
 
     /// @dev Emit events when add token balance
     event AddTokenBalance(
@@ -59,10 +49,7 @@ interface ITokenManager {
     );
 
     /// @dev Emit events when update token white list
-    event UpdateTokenWhiteListed(
-        address indexed tokenAddress,
-        bool isWhiteListed
-    );
+    event UpdateTokenWhiteListed(address indexed tokenAddress, bool isWhiteListed);
 
     /// @dev Error when token is not whitelisted
     error TokenIsNotWhiteListed(address tokenAddress);

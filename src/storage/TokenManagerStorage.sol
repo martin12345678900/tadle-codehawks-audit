@@ -16,8 +16,7 @@ contract TokenManagerStorage is UpgradeableStorage {
 
     /// @dev user token balance can be claimed by user.
     /// @dev userTokenBalanceMap[accountAddress][tokenAddress][tokenBalanceType]
-    mapping(address => mapping(address => mapping(TokenBalanceType => uint256)))
-        public userTokenBalanceMap;
+    mapping(address => mapping(address => mapping(TokenBalanceType => uint256))) public userTokenBalanceMap;
 
     /// @dev token white list
     mapping(address => bool) public tokenWhiteListed;

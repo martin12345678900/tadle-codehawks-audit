@@ -13,25 +13,19 @@ interface IPerMarkets {
      * @dev Get offer info by offer address
      * @param _offer offer address
      */
-    function getOfferInfo(
-        address _offer
-    ) external view returns (OfferInfo memory _offerInfo);
+    function getOfferInfo(address _offer) external view returns (OfferInfo memory _offerInfo);
 
     /**
      * @dev Get stock info by stock address
      * @param _stock stock address
      */
-    function getStockInfo(
-        address _stock
-    ) external view returns (StockInfo memory _stockInfo);
+    function getStockInfo(address _stock) external view returns (StockInfo memory _stockInfo);
 
     /**
      * @dev Get maker info by maker address
      * @param _maker maker address
      */
-    function getMakerInfo(
-        address _maker
-    ) external view returns (MakerInfo memory _makerInfo);
+    function getMakerInfo(address _maker) external view returns (MakerInfo memory _makerInfo);
 
     /**
      * @dev Update offer status
@@ -56,11 +50,7 @@ interface IPerMarkets {
      * @param _settledPoints settled points
      * @param _settledPointTokenAmount settled point token amount
      */
-    function settledAskOffer(
-        address _offer,
-        uint256 _settledPoints,
-        uint256 _settledPointTokenAmount
-    ) external;
+    function settledAskOffer(address _offer, uint256 _settledPoints, uint256 _settledPointTokenAmount) external;
 
     /**
      * @dev Settle ask taker
@@ -70,12 +60,8 @@ interface IPerMarkets {
      * @param _settledPoints settled points
      * @param _settledPointTokenAmount settled point token amount
      */
-    function settleAskTaker(
-        address _offer,
-        address _stock,
-        uint256 _settledPoints,
-        uint256 _settledPointTokenAmount
-    ) external;
+    function settleAskTaker(address _offer, address _stock, uint256 _settledPoints, uint256 _settledPointTokenAmount)
+        external;
 
     /// @dev Event when offer created
     event CreateOffer(
@@ -111,13 +97,7 @@ interface IPerMarkets {
     );
 
     /// @dev Event when offer listed
-    event ListOffer(
-        address indexed offer,
-        address indexed stock,
-        address authority,
-        uint256 points,
-        uint256 amount
-    );
+    event ListOffer(address indexed offer, address indexed stock, address authority, uint256 points, uint256 amount);
 
     /// @dev Event when offer closed
     event CloseOffer(address indexed offer, address indexed authority);
@@ -138,19 +118,10 @@ interface IPerMarkets {
     event StockStatusUpdated(address _stock, StockStatus _status);
 
     /// @dev Event when ask offer settled
-    event SettledAskOffer(
-        address _offer,
-        uint256 _settledPoints,
-        uint256 _settledPointTokenAmount
-    );
+    event SettledAskOffer(address _offer, uint256 _settledPoints, uint256 _settledPointTokenAmount);
 
     /// @dev Event when ask taker settled
-    event SettledBidTaker(
-        address _offer,
-        address _stock,
-        uint256 _settledPoints,
-        uint256 _settledPointTokenAmount
-    );
+    event SettledBidTaker(address _offer, address _stock, uint256 _settledPoints, uint256 _settledPointTokenAmount);
 
     /// @dev Error when invalid each trade tax rate
     error InvalidEachTradeTaxRate();
@@ -183,23 +154,13 @@ interface IPerMarkets {
     error InvalidOfferStatus();
 
     /// @dev Error when invalid offer status
-    error InvalidAbortOfferStatus(
-        AbortOfferStatus _targetStatus,
-        AbortOfferStatus _currentStatus
-    );
+    error InvalidAbortOfferStatus(AbortOfferStatus _targetStatus, AbortOfferStatus _currentStatus);
 
     /// @dev Error when invalid stock status
-    error InvalidStockStatus(
-        StockStatus _targetStatus,
-        StockStatus _currentStatus
-    );
+    error InvalidStockStatus(StockStatus _targetStatus, StockStatus _currentStatus);
 
     /// @dev Error when not enough points
-    error NotEnoughPoints(
-        uint256 _totalPoints,
-        uint256 _usedPoints,
-        uint256 _points
-    );
+    error NotEnoughPoints(uint256 _totalPoints, uint256 _usedPoints, uint256 _points);
 }
 
 /**
